@@ -1,0 +1,41 @@
+<div id="resources">
+  <hr />
+
+  <div class="contextual">
+  <%
+      if authorize_for('issue_resources', 'new') 
+      onclick = "Element.toggle('#{'new-resource-form'}'); this.blur(); jQuery('#select_dependencia').quickselect(); return false;"
+  %>
+      <%= link_to(l(:button_add), "#", :onclick => onclick) %>
+  <% end %>
+  </div>
+
+  <p><strong><%= l(:field_resources) %></strong></p>
+  <%= render :partial => 'issue_resources/list', :locals => {:issue => @issue} %>
+
+  <% if authorize_for('issue_resources', 'new') %>
+    <% remote_form_for(
+	     :resource, @resource, 
+         :url => {:controller => 'issue_resources', :action => 'new', :issue_id => @issue},
+         :method => :post,
+         :html => {:id => 'new-resource-form',:style => (@resource ? '' : 'display: none;')},
+		 :complete => "jQuery('#select_dependencia').quickselect();"
+	   ) do |f| %>
+      <%= render :partial => 'issue_resources/form', :locals => (local_assigns.merge({:f => f})) %>
+    <% end %>
+  <% end %>
+</div>
+
+
+<% content_for :header_tags do %>
+
+    <%= stylesheet_link_tag 'jquery.quickselect.css', :plugin => 'redmine_resources' %>
+
+    <%= javascript_include_tag 'jquery-1.6.4.js', :plugin => 'redmine_resources' %>
+    <%= javascript_include_tag 'quicksilver.js', :plugin => 'redmine_resources' %>
+    <%= javascript_include_tag 'jquery.quickselect.js', :plugin => 'redmine_resources' %>
+    
+	<%= javascript_tag "
+	    $.noConflict();
+	" %>
+<% end %>

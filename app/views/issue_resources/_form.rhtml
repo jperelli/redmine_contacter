@@ -1,0 +1,36 @@
+<%= error_messages_for :resource %>
+
+<table>
+  <tr>
+    <td><%= l(:label_dependencias) %>:</td>
+    <td width="100%">
+	  <select id="select_dependencia" name="dependencia_id">
+	    <option value=""></option>
+	    <% 
+          dependencias = [] if local_assigns[:dependencias].nil?
+          dependencias.each do |dep|
+        %>
+          <option value="<%= dep.id %>"><%= dep.nombre %></option>
+        <% end %>
+	  </select>
+	  <style type="text/css">
+		#select_dependencia_quickselect { width:95% }
+	  </style>
+    </td>
+  </tr>
+  <tr>
+    <td>
+    </td>
+    <td>
+		<small>(Escriba para buscar)</small>
+    </td>
+  </tr>
+  <tr>
+    <td>
+    </td>
+    <td>
+      <%= submit_tag l(:button_add) %>
+      <%= toggle_link l(:button_cancel), 'new-resource-form'%>
+    </td>
+  </tr>
+</table>

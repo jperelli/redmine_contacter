@@ -1,0 +1,18 @@
+<h2>Resources#index</h2>
+<%= will_paginate @ress %>
+<table>
+<tr>
+  <th>issue_id</th>
+  <th>dependencia_id</th>
+</tr>
+<%
+   @ress.each do |res|
+   issue = Issue.find(res.issue_id) 
+%>
+<tr>
+  <td><%= link_to issue.id, {:controller => 'issues', :action => 'show', :id => issue} %></td>
+  <td><%= res.dependencia_id %></td>
+  <tr>
+<% end %>
+</table>
+<%= will_paginate @ress %>

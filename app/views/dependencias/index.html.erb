@@ -1,0 +1,39 @@
+<div class="contextual">
+	<% form_tag({:action => :search}, :method => :get) do %>
+		<%= label_tag(:s, "Buscar:") %>
+		<%= text_field_tag(:s) %>
+		<%= submit_tag :Buscar %>
+	<% end %>
+
+	<% if User.current.admin? %>
+		<%= link_to 'Agregar Nueva', {:controller => 'dependencias', :action => 'new'}, :class => 'icon icon-add' %>
+	<% end %>
+</div>
+
+<h2>Dependencias</h2>
+<%= will_paginate @deps %>
+<table>
+<tr>
+  <th>Id</th>
+  <th>Oracle_id</th>
+  <th>Cod4</th>
+  <th>Cod8</th>
+  <th>Nombre</th>
+  <th>Tel&eacute;fonos</th>
+  <th>Direcci&oacute;n</th>
+</tr>
+<%
+   @deps.each do |dep| 
+%>
+<tr>
+  <td><%= link_to dep.id, {:controller => 'dependencias', :action => 'show', :id => dep.id } %></td>
+  <td><%= dep.oracle_id %></td>
+  <td><%= dep.cod4 %></td>
+  <td><%= dep.cod8 %></td>
+  <td><%= link_to dep.nombre, {:controller => 'dependencias', :action => 'show', :id => dep.id } %></td>
+  <td><%= dep.telefonos %></td>
+  <td><%= dep.direccion %></td>
+</tr>
+<% end %>
+</table>
+<%= will_paginate @deps %>

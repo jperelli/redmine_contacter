@@ -1,0 +1,37 @@
+<% if User.current.admin? %>
+<div class="contextual">
+    <%= link_to 'Editar', {:controller => 'dependencias', :id => @dep, :action => 'edit'}, :class => 'icon icon-edit' %>
+    <%= link_to 'Eliminar', {:controller => 'dependencias', :id => @dep, :action => 'destroy'}, :class => 'icon icon-del', :confirm => "Seguro que quiere eliminar la dependencia #{@dep.nombre}?" %>
+</div>
+<% end %>
+
+<h2>Dependencia: <%= @dep.nombre %></h2>
+<ul>
+  <li>id: <%= @dep.id %></li>
+  <li>oracle_id: <%= @dep.oracle_id %></li>
+  <li>cod4: <%= @dep.cod4 %></li>
+  <li>cod8: <%= @dep.cod8 %></li>
+  <li>nombre: <%= @dep.nombre %></li>
+  <li>direccion: <%= @dep.direccion %></li>
+  <li>telefonos: <%= @dep.telefonos %></li>
+  <li>fax: <%= @dep.fax %></li>
+  <li>e-mail: <%= @dep.email %></li>
+</ul>
+
+<h2>Issues asociados</h2>
+<%= will_paginate @issues %>
+<table>
+<tr>
+  <th>id</th>
+  <th>titulo</th>
+</tr>
+<%
+   @issues.each do |i| 
+%>
+<tr>
+  <td><%= link_to "#"+i.id.to_s, {:controller => 'issues', :action => 'show', :id => i } %></td>
+  <td><%= link_to i.subject, {:controller => 'issues', :action => 'show', :id => i } %></td>
+ </tr>
+<% end %>
+</table>
+<%= will_paginate @issues %>

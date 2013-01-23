@@ -1,0 +1,51 @@
+<h2>Agregar Dependencia</h2>
+
+<% form_for @dependencia, :url => { :action => 'create', :id => @dependencia } do |f| %>
+
+<div class="box tabular">
+
+  <p>
+    <%= f.label :oracle_id, 'oracle_id' %>
+    <%= f.text_field :oracle_id %>
+  </p>
+
+  <p>
+    <%= f.label :nombre, 'nombre <span class="required">*</span>' %>
+    <%= f.text_field :nombre %>
+  </p>
+
+  <p>
+    <%= f.label :telefonos, 'telefonos' %>
+    <%= f.text_field :telefonos %>
+  </p>
+
+  <p>
+    <%= f.label :fax, 'fax' %>
+    <%= f.text_field :fax %>
+  </p>
+
+  <p>
+    <%= f.label :direccion, 'direccion' %>
+    <%= f.text_field :direccion %>
+  </p>
+
+  <p>
+    <%= f.label :email, 'email' %>
+    <%= f.text_field :email %>
+  </p>
+
+  <p>
+    <%= f.label :cod4, 'cod4' %>
+    <%= f.text_field :cod4 %>
+  </p>
+
+  <p>
+    <%= f.label :cod8, 'cod8' %>
+    <%= f.text_field :cod8 %>
+  </p>
+
+</div>
+
+<%= f.submit l(:button_create) %>
+	
+<% end %>

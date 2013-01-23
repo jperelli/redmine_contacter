@@ -1,0 +1,37 @@
+<% if authorize_for('issue_resources', 'new') %>
+    <%= error_messages_for :resource %>
+	<p>
+		<label><%= l(:label_dependencias) %>:</label>
+
+		<select id="select_dependencia" name="dependencia_id">
+			<option value=""></option>
+			<% dependencias = [] if local_assigns[:dependencias].nil? %>
+			<% dependencias.each do |dep| %>
+			<option value="<%= dep.id %>"><%= dep.nombre %></option>
+			<% end %>
+		</select>
+		<style type="text/css">
+			#select_dependencia_quickselect { width:95% }
+		</style>
+		<small>(Escriba para buscar)</small>
+	
+	</p>
+
+<% end %>
+
+
+<% content_for :header_tags do %>
+
+    <%= stylesheet_link_tag 'jquery.quickselect.css', :plugin => 'redmine_resources' %>
+
+    <%= javascript_include_tag 'jquery-1.6.4.js', :plugin => 'redmine_resources' %>
+    <%= javascript_include_tag 'quicksilver.js', :plugin => 'redmine_resources' %>
+    <%= javascript_include_tag 'jquery.quickselect.js', :plugin => 'redmine_resources' %>
+    
+	<%= javascript_tag "
+	    $.noConflict();
+		jQuery(document).ready(function($) {
+			$('#select_dependencia').quickselect();
+		});
+	" %>
+<% end %>
