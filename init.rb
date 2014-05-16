@@ -23,10 +23,10 @@ require_dependency 'redmine_resources/hooks'
 require_dependency 'redmine_resources/issue_new'
 
 Redmine::Plugin.register :redmine_resources do
-  name 'Dependencias'
+  name 'redmine_contacter'
   author 'Julian Perelli'
   description 'Permite linkear dependencias a un issue. Basado en "Issue Resources" de Daniel Vandersluis'
-  version '0.0.5'
+  version '0.0.6'
   
    project_module :resources do |map|
     map.permission :view_resources, { }
